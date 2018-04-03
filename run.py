@@ -57,7 +57,7 @@ async def request(ctx):
 			await client.delete_message(ctx.message)
 		if logChannelId is not None:
 			message = "<@{0.message.author.id}> ({0.message.author.id} => {0.message.author.name}) has recieved license `" + licenses.readline() + "`"
-			await client.send_message(client.get_channel(logChannelId), accountMessageSend.format(ctx))
+			await client.send_message(client.get_channel(logChannelId), message.format(ctx))
 		licenses.close()
 	else:
 		print("Warning: Out of Stock; Refill in \"" + storage + "\"")
