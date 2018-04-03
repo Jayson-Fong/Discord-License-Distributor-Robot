@@ -39,7 +39,7 @@ client = commands.Bot(command_prefix=prefix)
 async def on_ready():
 	print("Logged in as " +  client.user.name + " with client id of " + client.user.id)
 	if not gameName == None:
-		await client.change_presence(game=discord.Game(name=gameName))
+		await client.change_presence(activity=discord.Game(gameName))
 @client.command(pass_context = True)
 @commands.cooldown(cooldownAttempts, cooldownSeconds, commands.BucketType.user)
 async def request(ctx):
@@ -53,28 +53,28 @@ async def request(ctx):
 				data = data + line
 			with open(storage, 'w') as w:
 				w.write(data)
-			await client.send_message(ctx.message.author, message)
-			await client.delete_message(ctx.message)
+			await ctx.message.author.send(message)
+			await ctx.message.delete()
 		if logChannelId is not None:
 			message = "<@{0.message.author.id}> ({0.message.author.id} => {0.message.author.name}) has recieved license `" + licenses.readline() + "`"
-			await client.send_message(client.get_channel(logChannelId), accountMessageSend.format(ctx))
+			await client.get_channel(logChannelId).send(message.format(ctx))
 		licenses.close()
 	else:
 		print("Warning: Out of Stock; Refill in \"" + storage + "\"")
-	await client.send_message(ctx.message.author, "Sorry, we are currently out of stock on licenses. Please try again later.")
+	await ctx.message.author.send("Sorry, we are currently out of stock on licenses. Please try again later.")
 @client.command(pass_context = True)
 @commands.cooldown(stockCooldownAttempts, stockCooldownSeconds, commands.BucketType.user)
 async def stock(ctx):
 	with open(storage) as stockcheck:
 		stock = len(w.readlines())
 	stockcheck.close()
-	await client.send_message(ctx.message.author, "We currently have {0} licenses in stock.".format(stock))
-	await client.delete_message(ctx.message)
+	await ctx.message.author.send("We currently have {0} licenses in stock.".format(stock))
+	await ctx.message.delete()
 @client.event
 async def on_command_error(error, ctx):
 	if isinstance(error, commands.CommandOnCooldown):
-		await client.send_message(ctx.message.author, "Sorry, this command is currently on cooldown. Please try again in {0} seconds.".format(error.retry_after))
-		await client.delete_message(ctx.message)
+		await ctx.message.author.send("Sorry, this command is currently on cooldown. Please try again in {0} seconds.".format(error.retry_after))
+		await ctx.message.delete()
 	if debug == True:
 		raise error
 client.run(token)
