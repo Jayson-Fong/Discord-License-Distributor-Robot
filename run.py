@@ -73,7 +73,7 @@ async def stock(ctx):
 @client.event
 async def on_command_error(error, ctx):
 	if isinstance(error, commands.CommandOnCooldown):
-		await ctx.message.author.send("Sorry, this command is currently on cooldown. Please try again in {0} seconds.".format(error.retry_after))
+		await ctx.message.author.send("Sorry, this command is currently on cooldown. Please try again in `{0}` seconds.".format(error.retry_after))
 		await ctx.message.delete()
 	if debug == True:
 		raise error
