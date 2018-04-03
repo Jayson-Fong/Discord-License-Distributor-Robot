@@ -37,7 +37,7 @@ data.close()
 client = commands.Bot(command_prefix=prefix)
 @client.event
 async def on_ready():
-	print("Logged in as " +  client.user.name + " with client id of " + client.user.id)
+	print("Logged in as " +  client.user.name + " with client id of " + str(client.user.id))
 	if not gameName == None:
 		await client.change_presence(activity=discord.Game(gameName))
 @client.command(pass_context = True)
