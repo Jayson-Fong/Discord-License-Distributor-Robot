@@ -68,7 +68,7 @@ async def stock(ctx):
 	with open(storage) as stockcheck:
 		stock = len(stockcheck.readlines())
 	stockcheck.close()
-	await ctx.message.author.send("We currently have {0} licenses in stock.".format(stock))
+	await ctx.message.author.send("We currently have `{0}` licenses in stock.".format(stock))
 	await ctx.message.delete()
 @client.event
 async def on_command_error(error, ctx):
