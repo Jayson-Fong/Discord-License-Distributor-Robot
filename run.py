@@ -66,14 +66,14 @@ async def request(ctx):
 @commands.cooldown(stockCooldownAttempts, stockCooldownSeconds, commands.BucketType.user)
 async def stock(ctx):
 	with open(storage) as stockcheck:
-		stock = len(w.readlines())
+		stock = len(stockcheck.readlines())
 	stockcheck.close()
-	await client.send_message(ctx.message.author, "We currently have {0} licenses in stock.".format(stock))
+	await client.send_message(ctx.message.author, "We currently have `{0}` licenses in stock.".format(stock))
 	await client.delete_message(ctx.message)
 @client.event
 async def on_command_error(error, ctx):
 	if isinstance(error, commands.CommandOnCooldown):
-		await client.send_message(ctx.message.author, "Sorry, this command is currently on cooldown. Please try again in {0} seconds.".format(error.retry_after))
+		await client.send_message(ctx.message.author, "Sorry, this command is currently on cooldown. Please try again in `{0}` seconds.".format(error.retry_after))
 		await client.delete_message(ctx.message)
 	if debug == True:
 		raise error
