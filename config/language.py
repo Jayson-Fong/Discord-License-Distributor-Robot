@@ -1,7 +1,0 @@
-start_msg = "Logged in as {0} with client id of {1}"
-license_provide = "Here is your license: "
-license_log = "<@{0.message.author.id}> ({0.message.author.id} => {0.message.author.name}) has recieved license `{0}`"
-stock_depleted_console = "Warning: Out of Stock; Refill in \" {0} \""
-stock_depleted = "Sorry, we are currently out of stock on licenses. Please try again later."
-stock_check = "We currently have `{0}` licenses in stock."
-cooldown_error = "Sorry, this command is currently on cooldown. Please try again in `{0}` seconds."
